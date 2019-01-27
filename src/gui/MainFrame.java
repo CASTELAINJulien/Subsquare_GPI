@@ -13,6 +13,13 @@ public class MainFrame extends JFrame implements Runnable,MouseListener,KeyListe
 	private Simulation simulation;
 	private Scene scene = new Scene();
 	private boolean stop = true;
+	
+	private JMenuBar menuBar = new JMenuBar();
+	private JMenu menu_game = new JMenu("Game");
+	private JMenuItem item_save = new JMenuItem("Save");
+	private JMenuItem item_load = new JMenuItem("Load a game");
+	private JMenuItem item_manual = new JMenuItem("User's manual");
+	private JMenuItem item_leave = new JMenuItem("Leave without save");
 
 	/*********		construct		*********/
 	public MainFrame() {
@@ -38,6 +45,28 @@ public class MainFrame extends JFrame implements Runnable,MouseListener,KeyListe
 		getContentPane().setLayout(null);
 		
 		// TODO initialize your frame here
+		// initialization of the menu
+		
+		this.menu_game.add(item_save);
+		this.menu_game.add(item_load);
+		this.menu_game.add(item_manual);
+		this.menu_game.add(item_leave);
+		
+		//Action for leave without save
+		item_leave.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent event) {
+				System.exit(0);
+			}
+		});
+		
+		item_manual.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent event) {
+				new ManualFrame();
+			}
+		});
+		
+		this.menuBar.add(menu_game);
+		this.setJMenuBar(menuBar);
 		
 		scene.setBounds(165,5,980,570);
 		getContentPane().add(scene);
